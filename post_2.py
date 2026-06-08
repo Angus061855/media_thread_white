@@ -392,7 +392,7 @@ if __name__ == "__main__":
         post_to_threads(post_text)
         update_status(page_id, "已發")
         print("✅ 完成！")
-        send_telegram(f"✅ media 給主題 發文成功！\n主題：{custom_topic}")
+        send_telegram(f"✅ Thread White 2 給主題 發文成功！\n主題：{custom_topic}")
     except Exception as e:
         error_msg = f"❌ media 給主題 發文失敗！\n錯誤原因：{str(e)}"
         print(error_msg)
