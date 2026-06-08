@@ -391,7 +391,7 @@ if __name__ == "__main__":
         post_to_threads(post_text)
         save_to_notion(topic, post_text)
         print("✅ 完成！")
-        send_telegram(f"✅ 自動發文成功！\n主題：{topic}")
+        send_telegram(f"✅ Thread White 1 自動發文成功！\n主題：{topic}")
     except Exception as e:
         error_msg = f"❌ 發文失敗！\n錯誤原因：{str(e)}"
         print(error_msg)
