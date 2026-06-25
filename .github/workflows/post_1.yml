@@ -3,7 +3,6 @@ name: Auto Post _1 (自動生成)
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 7 * * *'
     - cron: '0 14 * * *'
 
 jobs:
