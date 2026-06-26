@@ -237,42 +237,55 @@ def generate_post(used_topics):
 第一則：震撼 → 第二則：同情 → 第三則：憤怒 → 第四則：恐懼 → 第五則：希望＋警惕 → 第六則：強化警惕 → 第七則：信任＋行動呼籲
 """
 
-    for attempt in range(5):
-        try:
-            print(f"🤖 第 {attempt+1} 次呼叫 Gemini...")
-            client = genai.Client(
-                api_key=GEMINI_API_KEY,
-                http_options={"timeout": 300000}
-            )
-            response = client.models.generate_content(
-                model="gemini-2.5-flash",
-                contents=prompt
-            )
-            raw = response.text.strip()
-            cleaned = clean_text(raw)
+    models_to_try = [
+        "gemini-2.5-flash",
+        "gemini-2.0-flash",
+        "gemini-1.5-flash",
+    ]
 
-            print(f"📋 § 出現次數：{cleaned.count('§')}")
-            print(f"📋 前200字：{repr(cleaned[:200])}")
+    for model in models_to_try:
+        print(f"🤖 使用模型：{model}")
+        for attempt in range(3):
+            try:
+                print(f"  第 {attempt+1} 次呼叫 Gemini...")
+                client = genai.Client(
+                    api_key=GEMINI_API_KEY,
+                    http_options={"timeout": 300000}
+                )
+                response = client.models.generate_content(
+                    model=model,
+                    contents=prompt
+                )
+                raw = response.text.strip()
+                cleaned = clean_text(raw)
 
-            ok, reason = validate_output(cleaned)
-            if not ok:
-                print(f"⚠️ 第 {attempt+1} 次不合格：{reason}")
-                if attempt < 4:
-                    wait = 15 * (attempt + 1)
-                    print(f"等待 {wait} 秒後重試...")
-                    time.sleep(wait)
+                print(f"📋 § 出現次數：{cleaned.count('§')}")
+                print(f"📋 前200字：{repr(cleaned[:200])}")
+
+                ok, reason = validate_output(cleaned)
+                if not ok:
+                    print(f"⚠️ 第 {attempt+1} 次不合格：{reason}")
+                    if attempt < 2:
+                        wait = 15 * (attempt + 1)
+                        print(f"等待 {wait} 秒後重試...")
+                        time.sleep(wait)
                     continue
+
+                return cleaned
+
+            except Exception as e:
+                err = str(e)
+                print(f"  第 {attempt+1} 次失敗：{err}")
+                if "503" in err:
+                    wait = 2 ** attempt * 10  # 10, 20, 40 秒
+                    print(f"  503 過載，等 {wait} 秒...")
+                    time.sleep(wait)
                 else:
-                    raise Exception(f"Gemini 連續 5 次不合格，最後原因：{reason}")
+                    raise  # 非 503 直接丟出
 
-            return cleaned
+        print(f"  {model} 全部失敗，換下一個模型...")
 
-        except Exception as e:
-            print(f"第 {attempt+1} 次失敗：{e}")
-            if attempt < 4:
-                time.sleep(30)
-            else:
-                raise
+    raise Exception("所有模型都失敗，放棄")
 
 def extract_topic(post_text):
     for line in post_text.strip().split("\n"):
