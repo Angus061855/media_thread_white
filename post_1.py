@@ -238,9 +238,9 @@ def generate_post(used_topics):
 """
 
     models_to_try = [
-        "gemini-2.5-flash",
-        "gemini-2.0-flash",
-        "gemini-1.5-flash",
+        "models/gemini-2.5-flash-lite",
+        "models/gemini-3-flash",
+        "models/gemini-3.1-flash-lite",
     ]
 
     for model in models_to_try:
