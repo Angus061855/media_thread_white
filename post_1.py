@@ -283,8 +283,11 @@ def generate_post(used_topics):
                     wait = 2 ** attempt * 10  # 10, 20, 40 秒
                     print(f"  503 過載，等 {wait} 秒...")
                     time.sleep(wait)
+                elif "429" in err:
+                    print(f"  429 額度已滿，直接換下一個模型")
+                    break  # 跳出 attempt 迴圈，換模型，不要再重試同一個
                 else:
-                    raise  # 非 503 直接丟出
+                    raise  # 其他錯誤直接丟出
 
         print(f"  {model} 全部失敗，換下一個模型...")
 
