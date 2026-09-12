@@ -3,7 +3,7 @@ name: Auto Post _6 (段落直接發)
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 14 * * *'
+    - cron: '0 10 * * *'
 
 jobs:
   post:
