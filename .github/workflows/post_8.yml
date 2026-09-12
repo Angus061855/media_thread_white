@@ -34,4 +34,4 @@ jobs:
         run: |
           pip uninstall google-generativeai -y || true
           pip install google-genai requests
-          python post_7.py
+          python post_8.py
