@@ -166,11 +166,18 @@ STYLE_NAMES = list(WRITING_STYLES.keys())
 def send_telegram(message):
     token = os.environ["TELEGRAM_TOKEN"]
     chat_id = os.environ["TELEGRAM_CHAT_ID"]
-    requests.post(
+
+    res = requests.post(
         f"https://api.telegram.org/bot{token}/sendMessage",
-        data={"chat_id": chat_id, "text": message},
+        data={
+            "chat_id": chat_id,
+            "text": message
+        },
         timeout=30
     )
+
+    print("Telegram 狀態碼：", res.status_code)
+    print("Telegram 回應：", res.text[:500])
 
 
 def get_pending_topics():
