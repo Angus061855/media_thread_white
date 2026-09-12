@@ -22,7 +22,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: Run post_1
+      - name: Run post_7
         env:
           THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
@@ -34,4 +34,4 @@ jobs:
         run: |
           pip uninstall google-generativeai -y || true
           pip install google-genai requests
-          python post_1.py
+          python post_7.py
