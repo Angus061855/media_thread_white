@@ -35,4 +35,4 @@ jobs:
           NOTION_DATABASE_ID_5: ${{ secrets.NOTION_DATABASE_ID_6 }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python post_5.py
+        run: python post_6.py
