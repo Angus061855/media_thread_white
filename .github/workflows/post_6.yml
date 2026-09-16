@@ -32,7 +32,7 @@ jobs:
           THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
           NOTION_TOKEN_2: ${{ secrets.NOTION_TOKEN_2 }}
-          NOTION_DATABASE_ID_5: ${{ secrets.NOTION_DATABASE_ID_6 }}
+          NOTION_DATABASE_ID_6: ${{ secrets.NOTION_DATABASE_ID_6 }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python post_6.py
