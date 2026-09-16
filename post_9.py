@@ -575,7 +575,7 @@ def post_to_threads(text):
 
 
 if __name__ == "__main__":
-    print("=== White 7 自動生成 ===")
+    print("=== White 9 自動生成 ===")
 
     pages = get_pending_topics()
 
@@ -661,20 +661,13 @@ if __name__ == "__main__":
 
         send_telegram(
             f"✅ White 9 發文成功！"
-            f"\n風格：{style_name}"
-            f"\n主題：{custom_topic}"
         )
 
     except Exception as e:
-        error_msg = (
-            f"❌ White 9 發文失敗！"
-            f"\n主題：{custom_topic}"
-            f"\n錯誤原因：{str(e)}"
-        )
+        error_msg = "❌ White 9 發文失敗！"
 
-        print(
-            error_msg
-        )
+        print(error_msg)
+        print(f"錯誤原因：{str(e)}")
 
         update_status(
             page_id,
