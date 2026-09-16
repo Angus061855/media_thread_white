@@ -623,7 +623,7 @@ if __name__ == "__main__":
         )
 
         send_telegram(
-            "❌ White 7 抽到空白主題，已標記失敗"
+            "❌ White 8 抽到空白主題，已標記失敗"
         )
 
         exit(0)
@@ -660,21 +660,14 @@ if __name__ == "__main__":
         )
 
         send_telegram(
-            f"✅ White 8 發文成功！"
-            f"\n風格：{style_name}"
-            f"\n主題：{custom_topic}"
+            "✅ White 8 發文成功！"
         )
 
     except Exception as e:
-        error_msg = (
-            f"❌ White 8 發文失敗！"
-            f"\n主題：{custom_topic}"
-            f"\n錯誤原因：{str(e)}"
-        )
+        error_msg = "❌ White 8 發文失敗！"
 
-        print(
-            error_msg
-        )
+        print(error_msg)
+        print(f"錯誤原因：{str(e)}")
 
         update_status(
             page_id,
