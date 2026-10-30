@@ -9,8 +9,8 @@ on:
         required: true
         default: false
   # 確認手動發布成功後，取消下面兩行註解：每天台灣時間 21:00。
-  # schedule:
-  #   - cron: '0 13 * * *'
+  schedule:
+    - cron: '0 2 * * *'
 
 permissions:
   contents: read
